@@ -1,0 +1,46 @@
+create table deptTbl(Deptno int primary key, Dname varchar(20), Loc varchar(20))
+insert into dept values(10,'Accounting','New York'), (20, 'Research', 'Dallas'), (30, 'Sales', 'Chicago'), (40, 'Operations', 'Boston')
+select * deptTbl
+
+
+create table empTbl (
+Empno int primary key,
+Ename varchar(20),
+Job varchar(20),
+Mgr_ID int, 
+Hiredate date,
+Salary int,
+Comm int,
+Deptno int references deptTbl(Deptno))
+
+insert into empTbl(Empno, Ename, Job, Mgr_ID, Hiredate, Salary, Comm, Deptno) values(7369,'Smith','Clerk',7902,'1980-12-17',800,20), (7566,'Jones','Manager',7839,'1981-04-02',2975,20), (7499,'Allen','Salesman',7698,'1981-02-20',1600,300,30), (7521,'Ward','Salesman',7698,'1981-02-22',1250,500,30), (7654,'Martin','Salesman',7698,'1981-09-28',1250,1400,30), (7844,'Turner','Salesman',7698,'1981-09-08',1500,0,30), (7698,'Blake','Manager',7839,'1981-05-01',2850,30), (7782,'Clark','Manager',7839,'1981-06-09',2450,10), (7788,'Scott','Analyst',7566,'1987-04-19',3000,20), (7839,'King','President',null,'1981-11-17',5000,10), (7876,'Adams','Clerk',7788,'1987-05-23',1100,20), (7900,'James','Clerk',7698,'1981-12-03',950,30),(7902,'Ford','Analyst',7566,'1981-12-03',3000,20), (7934,'Miller','Clerk',7782,'1982-01-23',1300,10)
+
+1]select * from empTbl where Ename like 'A%';
+
+2] select * from empTbl where Mgr_ID is NULL;
+
+3]select Ename, Empno, Sal from empTbl where Salary between 1200 and 1400
+
+4] update empTbl set Salary=Salary+( Salary *0.10) where Deptno=(select Deptno from deptTbl where Dname='Research')
+
+5]select count(Job) as 'Clerks Employed' from empTbl where Job='Clerk'
+
+6]select Job as 'Job Type', avg(Salary) as 'Average Salary', count(Empno) as 'Number of People' from empTbl group by Job;
+
+7]select min(Salary), max(Salary) from empTbl;
+
+8]select b.Deptno , count(a.Deptno) from deptTbl b left outer join empTbl a on a.Deptno=b.Deptno group by b.Deptno having count(a.Deptno)=0
+
+9]select Ename, Salary from empTbl where Job='Analyst' and Salary >1200 and Deptno=20 order by Ename
+
+10]select Deptno, count(Empno) as 'Total Salary Paid' from empTbl group by Deptno
+
+11]select Salary from empTbl where Ename='Miller' or Ename= 'Smith'
+
+12]select Ename from empTbl where Ename like '[AM]%'
+
+13]select Ename, Salary*12 as 'Yearly salary' from empTbl where Ename='Smith'
+
+14]select Ename, Empno, Salary from empTbl where Salary not  between 1200 and 1400
+
+15]select count(Empno) as 'Managers', Mgr_ID  from empTbl group by Mgr_ID  having count(Empno) >2
