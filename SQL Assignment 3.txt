@@ -1,0 +1,18 @@
+1. select * from empTbl where Empno in (select Mgr_ID from empTbl)
+2. select Ename, Salary from empTbl where Salary > 1000
+3. select Ename, Salary from empTbl where Ename not like 'James'
+4. select Ename from empTbl where Ename like '%A%'
+5. select Ename from empTbl where Ename like 'S%'
+6. select Ename from empTbl where Ename like '__l%'
+7. select Ename, round(Salary/31) as 'Daily Salary' from empTbl where name like 'Jonas'
+8. select Ename, round(Salary/12) as 'Monthly Salary' from empTbl 
+9. select AVG(Salary) as 'Average Annual Salary' from empTbl
+10. select Ename, Job, Salary, Deptno from empTbl where Job not in 'Salesman' and Deptno not in 30
+11. select distinct(Deptno) from empTbl inner join Deptno on empTbl.Deptno=deptTbl.Deptno
+12. select Ename as 'Employee', Salary as 'Monthly Salary', from empTbl where Salary>1500 and Deptno in (10,30)
+13. select Ename, Job, Salary from empTbl where Job in ('Manager', 'Analyst') and Salary not in (1000, 3000, 5000) 
+14. select Ename, Salary from empTblwhere Salary>(0.1 * Salary)
+15. select Ename from empTbl where name like '%l%l%' and (Deptno=30 or Mgr_ID=7782)
+16. select * from empTbl where extract(Year from age(current_data, Hiredate)) > 10 and extract(Year from age(current_data, Hiredate)) < 20
+17. select * from empTbl order by empTbl.Deptno ASC, empTbl.Ename DESC; 
+18. select Ename from empTbl where Ename like 'Miller' 
